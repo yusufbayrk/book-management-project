@@ -11,6 +11,9 @@ import { BookService } from './book/book.service';
 import { Book, BookSchema } from './models/book.schema';
 import { Favourite, FavouriteSchema } from './models/favourite.schema';
 
+//Please write the url information here by running mongodb in your local. Example: "mongodb://localhost:27017/booking-project-db"
+const MongoURL = 'Write your DB URL';
+
 @Module({
   imports: [
     JwtModule.register({
@@ -18,7 +21,8 @@ import { Favourite, FavouriteSchema } from './models/favourite.schema';
       secret: process.env.JWT_SECRET,
       signOptions: { expiresIn: '7d' },
     }),
-    MongooseModule.forRoot('mongodb://localhost:27017/booking-project-db'),
+
+    MongooseModule.forRoot(MongoURL),
     MongooseModule.forFeature([{ name: User.name, schema: UserSchema }]),
     MongooseModule.forFeature([{ name: Book.name, schema: BookSchema }]),
     MongooseModule.forFeature([
